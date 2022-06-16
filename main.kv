@@ -1,0 +1,172 @@
+#:import rgba kivy.utils.get_color_from_hex
+NavigationLayout:
+    MDNavigationDrawer:
+        drawer_logo: "Images\image.jpeg"
+        NavigationDrawerIconButton:
+            text: "Homepage"
+            icon: "home"
+            on_release:
+                screen_manager.current = "Homepage"
+        NavigationDrawerIconButton:
+            text: "Model"
+            icon: "lambda"
+            on_release:
+                screen_manager.current = "Model"
+        NavigationDrawerIconButton:
+            text: "Al Ashkirah"
+            icon: "brightness-2"
+            on_release:
+                screen_manager.current = "Al Ashkirah"
+        NavigationDrawerIconButton:
+            text: "Masirah"
+            icon: "brightness-7"
+            on_release:
+                screen_manager.current = "Masirah"
+        NavigationDrawerIconButton:
+            text: "Exit"
+            icon: "close-circle"
+            on_release:
+                exit()
+
+    BoxLayout:
+        orientation: "vertical"
+        canvas:
+            Rectangle:
+                source: "background.png"
+                size: self.size
+                pos: self.pos
+
+        MDToolbar:
+            title: "Surfin Oman"
+            left_action_items: [["menu", lambda x: root.toggle_nav_drawer()]]
+            elevation: 10
+            md_bg_color: app.theme_cls.primary_color
+            height: 50
+
+        ScreenManager:
+            id: screen_manager
+
+            Homepage:
+                name: "Homepage"
+                FloatLayout:
+                    Image:
+                        source: "Images\condition.png"
+                        pos_hint: {'x': 0.2, 'y':0.6}
+                        size_hint: 0.6, 0.4
+                        allow_stretch: True
+
+                    Image:
+                        source: "Images\msw.jpeg"
+                        size_hint: 0.1, 0.1
+                        pos_hint: {'x': 0, 'y': 0}
+                        keep_ratio: True
+                        allow_stretch: False
+                        size: self.size
+
+                    MDLabel:
+                        pos_hint: {'x':0.2, 'y': 0}
+                        size_hint: 0.2, 0.1
+                        text:"<---- this is the Magic Seaweed logo without them this would not have been possible"
+
+                    MDLabel:
+                        pos_hint: {'x':0.3 , 'y': 0.4}
+                        halign: 'center'
+                        size_hint: 0.4,0.1
+                        text: 'Welcome'
+                        font_style: 'H2'
+
+
+            Model:
+                layout: layout
+                name: "Model"
+                FloatLayout:
+                    MDLabel:
+                        text: 'Model'
+                        size_hint: 0.2,0.1
+                        pos_hint: {'x':0.4,'y': 0.9}
+                        font_style: 'H2'
+                    MDLabel:
+                        text: 'This page explains the models and their accuracies'
+                        size_hint: 0.2,0.1
+                        pos_hint: {'x':0.4,'y':0.8}
+                    Image:
+                        source: 'Images\plot.png'
+                        size_hint: 0.4,0.4
+                        pos_hint: {'x':0.3, 'y': 0.3}
+                    GridLayout:
+                        id: layout
+                        cols: 2
+                        rows: 4
+                        pos_hint: {'x':0.35,'y': 0}
+                        size_hint: 0.3,0.2
+                    MDLabel:
+                        text: 'SciKit uses prebuilt code to find the correlation between the windspeed, direction and the swell height. '
+                        pos_hint: {'x':0.05,'y': 0.65}
+                        size_hint: 0.3,0.05
+                    MDLabel:
+                        text: 'Gradient descent uses a machine learning technique to minimise the error in the predictions'
+                        pos_hint: {'x':0.05,'y': 0.45}
+                        size_hint: 0.3,0.05
+                    MDLabel:
+                        text: 'By Hand predictions uses equations to find the average correlation between all points of data'
+                        pos_hint: {'x':0.05,'y': 0.25}
+                        size_hint: 0.3,0.05
+                    MDLabel:
+                        text: 'The plot on the left shows the gradient and intercept for the gradient descent and by hand models. The by hand model is far more likely to predict a higher swell height.'
+                        size_hint: 0.2,0.2
+                        pos_hint: {'x': 0.75, 'y': 0.5}
+            AlAsh:
+                name: "Al Ashkirah"
+                FloatLayout:
+                    Table:
+                        size_hint: 0.6,0.95
+                        pos_hint: {'x':0, 'y':0}
+                        rows: 42
+                        cols: 5
+                    Image:
+                        source: 'Images\JoeMap.png'
+                        size_hint: 0.3,0.5
+                        pos_hint: {'x':0.7,'y':0.4}
+                        allow_stretch: True
+                    MDLabel:
+                        text: 'When surfing in Al Ashkarah you do so at a place called Joes Point. The break is rocky so wear shoes.'
+                        pos_hint:  {'x':0.7,'y':0.3}
+                        size_hint: 0.3,0.1
+                        font_style: 'Subtitle1'
+                    MDLabel:
+                        text: 'Map to Al Ashkrah'
+                        pos_hint: {'x':0.85,'y':0.9}
+                        font_style: 'Subtitle1'
+                        size_hint: 0.3,0.1
+                    Image:
+                        source: 'Images\surfingatjoes.png'
+                        size_hint: 0.3,0.3
+                        pos_hint: {'x': 0.7, 'y': 0}
+
+
+            Masirah:
+                name: "Masirah"
+                FloatLayout:
+                    Table:
+                        size_hint: 0.6,0.95
+                        pos_hint: {'x':0, 'y':0}
+                        rows: 42
+                        cols: 5
+                    Image:
+                        source: 'Images\MasirahMap.png'
+                        pos_hint: {'x':0.7,'y':0.4}
+                        size_hint: 0.3,0.5
+                    MDLabel:
+                        text: 'Map to Masirah'
+                        size_hint: 0.3,0.1
+                        pos_hint: {'x':0.85,'y':0.9}
+                        font_style: 'Subtitle1'
+                    MDLabel:
+                        text: 'To get to Masirah a 40m ferry is required. There are plenty of breaks but they should be on the East side of the island'
+                        size_hint: 0.3,0.1
+                        pos_hint: {'x':0.7,'y':0.3}
+                    Image:
+                        source: 'Images\masriahboat.png'
+                        size_hint: 0.3,0.3
+                        pos_hint: {'x': 0.7, 'y': 0}
+
